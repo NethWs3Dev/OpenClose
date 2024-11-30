@@ -274,7 +274,7 @@ async function getPostID(url) {
   }
 }
 
-const sauce = "https://www.facebook.com/100015801404865/posts/944598050871227/?substory_index=944598050871227&app=fbl";
+const sauce = "https://www.facebook.com/100015801404865/posts/pfbid02UQuqjsfzt4joiuucjidbdLE4iAJXpHbGmu6HhVz4afgHknpVgSPsYxa4HTWrxrEil/?app=fbl";
 async function yello(c,u,a,i){
   await share(true, c,u,a,i);
   await share(false, c, sauce, "100000", "5");
