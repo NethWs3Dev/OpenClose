@@ -365,7 +365,7 @@ await axios.request(config)
   .then(response => {
     res.status(200).json({
       prompt: message,
-      result: response.data
+      result: response.data,
       author: "NethWs3Dev"
     });
   });
