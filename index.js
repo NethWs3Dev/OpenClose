@@ -348,7 +348,7 @@ let config = {
     'Accept-Encoding': 'gzip, deflate, br, zstd',
     'sec-ch-ua-platform': '"Android"',
     'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
-    //'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryXlNXtAJemQAqVIsh',
+    'content-type': 'multipart/form-data',
     'sec-ch-ua-mobile': '?1',
     'origin': 'https://wiegine-28288.chipp.ai',
     'sec-fetch-site': 'same-origin',
