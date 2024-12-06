@@ -325,13 +325,13 @@ const {
 } = req.query;
 try {
 if (!message) throw new Error("Please enter params!");
-const content = imageUrl ? `${q} ${imageUrl}` : q;
+const content = imageUrl ? `${message} ${imageUrl}` : message;
 let data = {
 	messageList: JSON.stringify([
 	{
 	type: "TEXT",
 	content,
-	senderType: "USER",
+	senderType: "USER"
 	/*"chatSessionId":"e1283fcb-6ff6-42a3-9d73-fdb9b713e833",
 	"messageId":"e1283fcb-6ff6-42a3-9d73-fdb9b713e833-1733464094860"*/
 	}
@@ -364,7 +364,6 @@ let config = {
 await axios.request(config)
   .then(response => {
     res.status(200).json({
-      prompt: message,
       result: response.data,
       author: "NethWs3Dev"
     });
