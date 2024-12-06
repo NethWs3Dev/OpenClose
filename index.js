@@ -370,7 +370,8 @@ await axios.request(config)
   });
 } catch (error){
   return res.json({
-    error: error.stack || error.message || error
+    error: error.message || error,
+    fullError: error.stack
   });
 }
 });
