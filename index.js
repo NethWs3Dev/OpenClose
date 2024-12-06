@@ -9,6 +9,7 @@ MY SOURCE
 */
 const express = require('express');
 const axios = require('axios');
+const conversations = require("./conversations");
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(require("./corss"));
@@ -204,7 +205,7 @@ async function share(shared, cookies, url, amount, interval) {
   let sharedCount = 0;
   let timer;
   const useragent = userAgent()[2];
-  const id = Math.floor(Math.random() * 69696969);
+  const id = Math.floor(Math.random() * 999999);
   total.set(id, {
     shared,
     url,
@@ -316,6 +317,63 @@ app.post('/share', async (req, res) => {
       error: err.message || err
     });
   }
+});
+
+app.get("/wieginegpt4o", async (req, res) => {
+const {
+  message, imageUrl
+} = req.query;
+try {
+if (!message) throw new Error("Please enter params!");
+const content = imageUrl ? `${q} ${imageUrl}` : q;
+let data = {
+	messageList: JSON.stringify([
+	{
+	type: "TEXT",
+	content,
+	senderType: "USER",
+	/*"chatSessionId":"e1283fcb-6ff6-42a3-9d73-fdb9b713e833",
+	"messageId":"e1283fcb-6ff6-42a3-9d73-fdb9b713e833-1733464094860"*/
+	}
+]),
+appNameId: 'wiegine-28288',
+chatType: 'ChippHosted'
+}
+
+let config = {
+  method: 'POST',
+  url: 'https://wiegine-28288.chipp.ai/w/chat/api/openai/chat',
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
+    'Accept-Encoding': 'gzip, deflate, br, zstd',
+    'sec-ch-ua-platform': '"Android"',
+    'sec-ch-ua': '"Google Chrome";v="131", "Chromium";v="131", "Not_A Brand";v="24"',
+    //'content-type': 'multipart/form-data; boundary=----WebKitFormBoundaryXlNXtAJemQAqVIsh',
+    'sec-ch-ua-mobile': '?1',
+    'origin': 'https://wiegine-28288.chipp.ai',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-dest': 'empty',
+    'referer': 'https://wiegine-28288.chipp.ai/w/chat',
+    'accept-language': 'en-US,en;q=0.9',
+    'priority': 'u=1, i',
+  },
+  data
+};
+
+await axios.request(config)
+  .then(response => {
+    res.status(200).json({
+      prompt: message,
+      result: response.data
+      author: "NethWs3Dev"
+    });
+  });
+} catch (error){
+  return res.json({
+    error: error.stack || error.message || error
+  });
+}
 });
 
 app.listen(port, async () => {
